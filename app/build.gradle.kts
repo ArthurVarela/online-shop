@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -33,9 +34,31 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
+
+    implementation("com.google.firebase:firebase-database:21.0.0")
+    implementation("androidx.activity:activity:1.8.0")
+
+    val nav_version = "2.7.7"
+    implementation("androidx.navigation:navigation-fragment:$nav_version")
+    implementation("androidx.navigation:navigation-ui:$nav_version")
+
+    //glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+    //gson
+    implementation ("com.google.code.gson:gson:2.11.0")
+
+    //dotsIndicator
+    implementation("com.tbuonomo:dotsindicator:5.0")
+
+
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
