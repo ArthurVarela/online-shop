@@ -16,14 +16,14 @@ class SliderAdapter(
     private var sliderItems: List<SliderModel>,
     private val viewPager2: ViewPager2
 ) :
-    RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
+    RecyclerView.Adapter<SliderAdapter.SliderViewholder>() {
     private lateinit var context: Context
     private val runnable = Runnable {
         sliderItems = sliderItems
         notifyDataSetChanged()
     }
 
-    class SliderViewHolder(private val binding: SliderItemContainerBinding) :
+    class SliderViewholder(private val binding: SliderItemContainerBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun setImage(sliderItems: SliderModel, context: Context) {
@@ -37,14 +37,14 @@ class SliderAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): SliderViewHolder {
+    ): SliderViewholder {
         context = parent.context
         val binding =
-            SliderItemContainerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SliderViewHolder(binding)
+            SliderItemContainerBinding.inflate(LayoutInflater.from(context), parent, false)
+        return SliderViewholder(binding)
     }
 
-    override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SliderViewholder, position: Int) {
         holder.setImage(sliderItems[position], context)
         if (position == sliderItems.lastIndex - 1) {
             viewPager2.post(runnable)
