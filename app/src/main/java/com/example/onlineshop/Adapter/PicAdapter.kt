@@ -28,6 +28,7 @@ class PicAdapter(
 
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
         val item = items[position]
+
         holder.binding.pic.loadImage(item)
 
         holder.binding.root.setOnClickListener {

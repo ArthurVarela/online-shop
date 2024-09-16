@@ -33,7 +33,7 @@ class DetailActivity : BaseActivity() {
 
         binding.titleTxt.text = item.title
         binding.descriptionTxt.text = item.description
-        binding.priceTxt.text = "$"+item.price
+        binding.priceTxt.text = "$" + item.price
         binding.ratingTxt.text = "${item.rating} Rating"
         binding.addToCartBtn.setOnClickListener {
             item.numberInCart = numberOrder
@@ -41,7 +41,7 @@ class DetailActivity : BaseActivity() {
         }
         binding.backBtn.setOnClickListener { finish() }
         binding.cartBtn.setOnClickListener {
-          //  startActivity(Intent(this@DetailActivity, ))
+            startActivity(Intent(this@DetailActivity, CartActivity::class.java))
         }
     }
 
@@ -52,7 +52,8 @@ class DetailActivity : BaseActivity() {
         }
 
         binding.rvModelList.adapter = SelectModelAdapter(modelList)
-        binding.rvModelList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvModelList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val picList = ArrayList<String>()
         item.picUrl.forEach { imageUrl ->
@@ -63,12 +64,13 @@ class DetailActivity : BaseActivity() {
             .load(picList[0])
             .into(binding.img)
 
-        binding.rvPicList.adapter = PicAdapter(picList){ selectedImageUrl ->
+        binding.rvPicList.adapter = PicAdapter(picList) { selectedImageUrl ->
             Glide.with(this)
                 .load(selectedImageUrl)
                 .into(binding.img)
         }
 
-        binding.rvPicList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvPicList.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 }

@@ -9,6 +9,7 @@
 and secure shopping experience</string>
 
     <string name="signing">Already have an account?<font color="#39c7a5"> Sign In</font></string>
+    <string name="pay_cash_when_the_medicine_arrives_at_the_destination">Pay Cash When the medicine arrives at the destination</string>
 
 
 </resources>

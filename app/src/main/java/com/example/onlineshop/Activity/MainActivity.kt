@@ -1,5 +1,6 @@
 package com.example.onlineshop.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -27,7 +28,10 @@ class MainActivity : BaseActivity() {
         initBanner()
         initCategory()
         initRecommended()
+        initBottomMenu()
     }
+
+
 
     private fun banners(image: List<SliderModel>) {
 
@@ -77,5 +81,11 @@ class MainActivity : BaseActivity() {
 
         })
         viewModel.loadRecommended()
+    }
+
+    private fun initBottomMenu() {
+        binding.cartBtn.setOnClickListener {
+            startActivity(Intent(this@MainActivity, CartActivity::class.java))
+        }
     }
 }

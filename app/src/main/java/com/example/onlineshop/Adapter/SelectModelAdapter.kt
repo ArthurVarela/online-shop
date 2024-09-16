@@ -30,8 +30,7 @@ class SelectModelAdapter(val items: MutableList<String>) :
     }
 
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
-        val item = items[position]
-        holder.binding.modelTxt.text = item
+        holder.binding.modelTxt.text = items[position]
 
         holder.binding.root.setOnClickListener {
             lastSelectedPosition = selectedPosition

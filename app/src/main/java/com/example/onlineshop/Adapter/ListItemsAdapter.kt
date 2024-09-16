@@ -10,15 +10,16 @@ import com.example.onlineshop.Activity.DetailActivity
 import com.example.onlineshop.Model.ItemsModel
 import com.example.onlineshop.databinding.ViewholderRecommendedBinding
 
-class RecommendedAdapter(val items: MutableList<ItemsModel>) :
-    RecyclerView.Adapter<RecommendedAdapter.Viewholder>() {
+class ListItemsAdapter(val items: MutableList<ItemsModel>) :
+    RecyclerView.Adapter<ListItemsAdapter.Viewholder>() {
 
     class Viewholder(val binding: ViewholderRecommendedBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root)
 
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): Viewholder {
         val binding =
             ViewholderRecommendedBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Viewholder(binding)
@@ -40,11 +41,10 @@ class RecommendedAdapter(val items: MutableList<ItemsModel>) :
                 val intent = Intent(holder.itemView.context, DetailActivity::class.java).apply {
                     putExtra("object", item)
                 }
-                ContextCompat.startActivity(holder.itemView.context, intent, null)
+                ContextCompat.startActivity(holder.itemView.context,intent,null)
             }
         }
     }
 
     override fun getItemCount(): Int = items.size
-
 }

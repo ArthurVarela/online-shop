@@ -1,6 +1,9 @@
 package com.example.onlineshop.Adapter
 
+import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.onlineshop.Activity.ListItemsActivity
 import com.example.onlineshop.Model.CategoryModel
 import com.example.onlineshop.R
 import com.example.onlineshop.databinding.ViewholderCategoryBinding
@@ -18,19 +22,7 @@ class CategoryAdapter(val items: MutableList<CategoryModel>) :
     private var lastSelectedPosition = -1
 
     inner class Viewholder(val binding: ViewholderCategoryBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.root.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    lastSelectedPosition = selectedPosition
-                    selectedPosition = position
-                    notifyItemChanged(lastSelectedPosition)
-                    notifyItemChanged(selectedPosition)
-                }
-            }
-        }
-    }
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
         val binding =
@@ -85,6 +77,39 @@ class CategoryAdapter(val items: MutableList<CategoryModel>) :
                 )
             )
         }
+
+
+        holder.binding.root.setOnClickListener {
+            val position = position
+            if (position != RecyclerView.NO_POSITION) {
+                lastSelectedPosition = selectedPosition
+                selectedPosition = position
+                notifyItemChanged(lastSelectedPosition)
+                notifyItemChanged(selectedPosition)
+            }
+            Handler(Looper.getMainLooper()).postDelayed({
+                val intent=Intent(holder.itemView.context, ListItemsActivity::class.java).apply {
+                    putExtra("id",item.id.toString())
+                    putExtra("title",item.title)
+                }
+                ContextCompat.startActivity(holder.itemView.context,intent,null)
+            },1000)
+        }
+
+        /*holder.binding.root.setOnClickListener {
+            lastSelectedPosition = selectedPosition
+            selectedPosition = position
+            notifyItemChanged(lastSelectedPosition)
+            notifyItemChanged(selectedPosition)
+
+            /*Handler(Looper.getMainLooper()).postDelayed({
+                val intent = Intent(holder.itemView.context, ListItemsActivity::class.java).apply {
+                    putExtra("id", item.id.toString())
+                    putExtra("title", item.title)
+                }
+                ContextCompat.startActivity(holder.itemView.context, intent, null)
+            },1000)*/
+        }*/
     }
 
     override fun getItemCount(): Int = items.size
